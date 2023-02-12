@@ -1,0 +1,34 @@
+const form = document.querySelector("form");
+const resultat = document.querySelector("#resultat");
+
+form.addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  const arme = document.querySelector('input[name="arme"]:checked').value;
+  const element = document.querySelector('input[name="element"]:checked').value;
+
+  let personnages = [];
+  if (arme === "lance" && element === "feu") {
+    personnages.push("Amber");
+  }
+  if (arme === "arc" && element === "vent") {
+    personnages.push("Bennett");
+  }
+  if (arme === "épée" && element === "eau") {
+    personnages.push("Barbara");
+  }
+  if (arme === "bâton" && element === "terre") {
+    personnages.push("Noelle");
+  }
+
+  if (personnages.length === 0) {
+    resultat.textContent = "Aucun personnage ne correspond à tes choix. Essaie à nouveau !";
+  } else if (personnages.length === 1) {
+    resultat.textContent = `Tu es le personnage de Genshin Impact : ${personnages[0]}`;
+  } else {
+    const personnage = personnages[Math.floor(Math.random() * personnages.length)];
+    resultat.textContent = `Tu es le personnage de Genshin Impact : ${personnage}`;
+  }
+
+  resultat.style.display = "block";
+});
